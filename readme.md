@@ -41,3 +41,5 @@ Change the directory to features/tests
 
 `pytest <test_name> --alluredir=C:\Windows\Temp\BT-Project\allure-reports`
 
+
+Python version: 3.8.10
