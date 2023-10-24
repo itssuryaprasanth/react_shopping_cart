@@ -3,7 +3,7 @@
 ### Getting Started
 
 To begin, please install all required python packages through requirements.txt.
-    # install command ==> pip install -r requirements.txt
+    # install command ==> `pip install -r requirements.txt`
 
 Please keep the latest chrome driver version in %PYTHONPATH%/Scripts/chromedriver.exe
 Download the latest version from this link ==> https://chromedriver.chromium.org/downloads

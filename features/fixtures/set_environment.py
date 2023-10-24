@@ -1,7 +1,4 @@
 from features.wrappers.browser_driver import BrowserDriver
-from features.utilities.custom_logger import CustomLogger
-
-log = CustomLogger()
 
 
 class Environment:
@@ -15,7 +12,7 @@ class Environment:
         self.driver = driver
 
 
-def create_environment():
+def create_environment() -> Environment:
     driver = BrowserDriver()
     env = Environment()
     env.set_driver(driver=driver)
