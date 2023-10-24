@@ -1,7 +1,5 @@
 import os
-import pdb
 from decimal import Decimal
-from time import sleep
 from typing import Union, List
 import re
 import random
@@ -72,7 +70,7 @@ class ShoppingBase:
             log.info(f'Fetch the product title {[each_element.get_attribute("alt") for each_element in product]}')
             return [each_element.get_attribute("alt") for each_element in product]
 
-    def add_few_items_in_cart(self, count, return_items_with_price=False, free_shipping=False, same_item=False):
+    def add_few_items_in_cart(self, count, return_items_with_price=False, free_shipping=False, same_item=False) -> List:
         log.debug("Add few items in cart..")
         global data_from_text, product_name, element
         product_info: list = []
@@ -108,8 +106,8 @@ class ShoppingBase:
         log.debug(f"Items information ==> {product_info}")
         return product_info
 
-    def verify_price_of_items_in_cart(self, item_info):
-        status = []
+    def verify_price_of_items_in_cart(self, item_info) -> bool:
+        status: list = []
         log.debug("verify price of items in cart..")
         for single_tray in range(0, len(item_info)):
             for item_value in range(0, 1):
@@ -120,60 +118,60 @@ class ShoppingBase:
             return all(status)
 
     @staticmethod
-    def fetch_price_of_the_product_from_dashboard(text):
+    def fetch_price_of_the_product_from_dashboard(text) -> Union[str, bool]:
         log.debug("Fetch price of the product from dashboard..")
         try:
             return "$  " + re.search("([^$]\d+.\d+)", text).group(1)
         except AttributeError:
             return False
 
-    def count_total_items_in_cart(self):
+    def count_total_items_in_cart(self) -> str:
         log.info(
             f"Verify total items in cart {(count_total_items_in_cart := self.driver.get_text_from_value(self.cart))}")
         return count_total_items_in_cart
 
-    def open_cart(self):
+    def open_cart(self) -> None:
         log.debug("Open cart..")
         self.driver.click_element(self.cart)
 
-    def click_on_checkout_in_cart(self):
+    def click_on_checkout_in_cart(self) -> None:
         log.debug("Click on checkout in cart..")
         self.driver.find_element_by_xpath(self.check_out['value']).click()
 
-    def get_sub_total_value_from_cart(self):
+    def get_sub_total_value_from_cart(self) -> str:
         log.debug(f"Sub total value in cart is {(sub_total_value := self.driver.get_text_from_value(self.sub_total))}")
         return ''.join(sub_total_value.split())
 
-    def accept_checkout_alert_message(self):
+    def accept_checkout_alert_message(self) -> None:
         log.debug("Accept checkout alert message..")
         self.driver.accept_alert()
 
-    def get_text_from_checkout_alert_message(self):
+    def get_text_from_checkout_alert_message(self) -> str:
         log.info(f"Text from checkout alert message is {(alert_value := self.driver.return_text_from_alert())}")
         log.info(f"After removing the un-necessary characters from alert message, "
                  f"actual value is {(sub_total_actual_value := ShoppingBase.fetch_price_of_the_product_from_dashboard(text=alert_value))}")
         return ''.join(sub_total_actual_value.split())
 
-    def refresh_shopping_page(self):
+    def refresh_shopping_page(self) -> None:
         log.debug("Refresh shopping page..")
         self.driver.do_page_refresh()
 
-    def verify_no_products_in_cart(self):
+    def verify_no_products_in_cart(self) -> bool:
         log.debug("verify no products in cart..")
         return self.driver.element_is_visible(self.no_products_in_cart)
 
-    def delete_items_from_the_cart(self, count):
+    def delete_items_from_the_cart(self, count) -> None:
         log.debug("delete items from the cart..")
         for _ in range(0, count):
             self.driver.click_element(self.remove_products_from_cart)
 
-    def increase_items_in_cart(self, how_many):
+    def increase_items_in_cart(self, how_many) -> None:
         log.debug("increase items in cart..")
         for _ in range(0, how_many):
             self.driver.click_element(self.add_items_in_cart)
 
     @staticmethod
-    def compare_sub_total_value_and_items_values(actual, how_many_times):
+    def compare_sub_total_value_and_items_values(actual, how_many_times) -> List:
         log.debug("compare sub total value and items values")
         if actual[1][1].startswith('$'):
             actual[1][1] = actual[1][1].replace('$', '')
@@ -181,7 +179,7 @@ class ShoppingBase:
         actual[1][1] = "$" + str(value * how_many_times)
         return actual
 
-    def verify_quantity_of_items_in_cart(self, item_info, quantity):
+    def verify_quantity_of_items_in_cart(self, item_info, quantity) -> bool:
         log.debug("verify quantity of items in cart..")
         element_update = self.quantity_of_product_in_cart.copy()
         element_update['value'] = element_update['value'].replace('{0}', item_info[0][0])
@@ -189,9 +187,9 @@ class ShoppingBase:
         return self.driver.element_is_visible(element_update)
 
     @staticmethod
-    def items_having_free_shipping_tag(items, free_shipping):
+    def items_having_free_shipping_tag(items, free_shipping) -> List:
         log.debug("items having free shipping tag..")
-        items_to_deliver = []
+        items_to_deliver: list = []
         for each_item in items:
             data_from_text_item = str(each_item.text).split("\n")
             if len(data_from_text_item) == 5 and free_shipping:

@@ -1,4 +1,3 @@
-import pdb
 from datetime import datetime
 from typing import Union, Any
 from allure_commons.types import AttachmentType
@@ -121,16 +120,16 @@ class BrowserDriver(webdriver.Chrome):
             )
             return None
 
-    def accept_alert(self):
+    def accept_alert(self) -> None:
         log.debug("Accept the alert")
         alert = self.switch_to.alert
         alert.accept()
 
-    def return_text_from_alert(self):
+    def return_text_from_alert(self) -> str:
         log.debug("bring the text from alert message")
         alert = self.switch_to.alert
         return alert.text
 
-    def do_page_refresh(self):
+    def do_page_refresh(self) -> None:
         log.debug("Performing page refresh..")
         self.refresh()

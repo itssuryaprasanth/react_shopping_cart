@@ -1,4 +1,3 @@
-import pdb
 from pytest_bdd import given, when, then, scenario, parsers
 from features.common_steps.common_steps import ShoppingSteps
 import pytest
