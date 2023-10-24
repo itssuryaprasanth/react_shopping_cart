@@ -1,0 +1,38 @@
+{
+
+  "Sizes": {
+            "locator":"xpath",
+              "value": "//span[@class='checkmark' and text()=\"{0}\"]"
+  },
+  "ProductsResult": {"locator":"xpath",
+                      "value": "//main[@class=\"sc-ebmerl-4 iliWeY\"]//p"
+  },
+  "ProductTiles": {"locator":"xpath",
+                    "value":"//div[@tabindex=\"1\"]"
+  },
+  "ProductInformation": {"locator":  "xpath",
+                      "value" : "//div[@class=\"sc-uhudcz-0 iZZGui\"]//div[@tabindex=\"1\"]//div[@alt]"
+  },
+  "FreeShippingLabel": {"locator":"xpath",
+                        "value":"//*[text()=\"Free shipping\"]"},
+
+  "AddToCartButton":{"locator":"xpath",
+                    "value":"//p[text()=\"{0}\"]//following-sibling::button"},
+  "Cart": {"locator":"xpath",
+            "value": "//div[@title=\"Products in cart quantity\"]"},
+  "NoProductsInCart": {"locator":"xpath",
+                        "value": "//p[text()=\"Add some products in the cart \"]"},
+  "SubTotal": {"locator":"xpath",
+                  "value":"(//p[text()=\"SUBTOTAL\"]//following-sibling::div//p)[1]"},
+  "RemoveProductsFromCart":{"locator":"xpath",
+                  "value": "//button[@title=\"remove product from cart\"]"},
+  "AddItemsInCart": {"locator":"xpath",
+                      "value": "//button[text()=\"+\"]"},
+  "RemoveItemsInCart" : {"locator":"xpath","value": "//button[text()=\"-\"]"},
+  "CloseCartPopup" : {"locator": "xpath", "value": "//button//span[text()='X']"},
+  "TotalItemsInCart": {"locator": "xpath","value":"(//span[text()=\"Cart\"]//parent::div//div)[2]"},
+  "ItemPricesInCart": {"locator": "xpath", "value":"//span[text()=\"Cart\"]//parent::div//following-sibling::div//div//p[contains(text(),\"{0}\")]//parent::div//following-sibling::div//p[contains(text(),\"{1}\")]"},
+  "Checkout": {"locator": "xpath","value": "(//button[text()=\"Checkout\"])[1]"},
+  "FreeShippingItems": {"locator": "xpath","value": "//div[text()=\"Free shipping\"]//following-sibling::p[text()=\"{0}\"]//following-sibling::button"},
+  "QuantityOfProductInCart": {"locator": "xpath", "value": "//button[@title=\"remove product from cart\"]//parent::div//div/p[text()=\"{0}\"]//following-sibling::p[text()='{1}']"}
+}
