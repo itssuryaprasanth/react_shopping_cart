@@ -2,6 +2,8 @@
 
 ### Getting Started
 
+## **Please clone master branch** 
+
 To begin, please install all required python packages through requirements.txt.
     # install command ==> `pip install -r requirements.txt`
 
